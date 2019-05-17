@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+
+html {
+  // 스크롤 OnOff 이슈로 추가됨
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: scroll;
+  background: #F4F4F4;
+  line-height: 1;
+  margin: 0;
+  font-size: 14px;
+}
+
+*, :after, :before {
+  box-sizing: inherit;
+}
+
+*:focus {
+  outline: none;
+}

@@ -693,6 +693,7 @@ export class NguCarousel<T> extends NguCarouselStore
       const currentSlideD = this.currentSlide - this.slideItems;
       const MoveSlide = currentSlideD + this.slideItems;
       this._btnBoolean(0, 1);
+
       if (this.currentSlide === 0) {
         currentSlide = this.dataSource.length - this.items;
         itemSpeed = 400;
@@ -703,7 +704,7 @@ export class NguCarousel<T> extends NguCarouselStore
       } else {
         this._btnBoolean(0, 0);
         if (touchMove > this.slideItems) {
-          currentSlide = this.currentSlide - touchMove;
+          currentSlide = this.currentSlide - this.slideItems;
           itemSpeed = 200;
         } else {
           currentSlide = this.currentSlide - this.slideItems;
@@ -712,11 +713,11 @@ export class NguCarousel<T> extends NguCarouselStore
       this._carouselScrollTwo(Btn, currentSlide, itemSpeed);
     } else if (Btn === 1 && ((!this.loop && !this.isLast) || this.loop)) {
       if (
-        this.dataSource.length <=
-          this.currentSlide + this.items + this.slideItems &&
+        (this.dataSource.length * this.slideItems) <=
+          this.currentSlide + (this.items * this.slideItems) + this.slideItems &&
         !this.isLast
       ) {
-        currentSlide = this.dataSource.length - this.items;
+        currentSlide = (this.dataSource.length * this.slideItems) - (this.items * this.slideItems);
         this._btnBoolean(0, 1);
       } else if (this.isLast) {
         currentSlide = translateXval = 0;
@@ -726,7 +727,7 @@ export class NguCarousel<T> extends NguCarouselStore
         this._btnBoolean(0, 0);
         if (touchMove > this.slideItems) {
           currentSlide =
-            this.currentSlide + this.slideItems + (touchMove - this.slideItems);
+            this.currentSlide + this.slideItems;
           itemSpeed = 200;
         } else {
           currentSlide = this.currentSlide + this.slideItems;
@@ -772,7 +773,6 @@ export class NguCarousel<T> extends NguCarouselStore
     } else {
       this._setStyle(this.nguItemsContainer.nativeElement, 'transition', ``);
     }
-    // console.log(this.dataSource);
     this.itemLength = this.dataSource.length;
     this._transformStyle(currentSlide);
     this.currentSlide = currentSlide;

@@ -36,20 +36,37 @@
   </ngu-carousel>
 </ng-container> -->
 <!-- <ng-container *ngFor="let item of [1,2,3,4,5]"> -->
-<ngu-carousel #myCarousel [inputs]="carouselTileConfig" [dataSource]="carouselTileItems$ | async">
-  <ngu-tile *nguCarouselDef="let item; let i = index; let ani = animate" [@slider]="ani">
-    <div class="tile" [style.background]="'url('+item+')'">
-      <h1>{{i + 1}}</h1>
+<!--<ngu-carousel #myCarousel [inputs]="carouselTileConfig" [dataSource]="carouselTileItems$ | async">-->
+  <!--<ngu-tile *nguCarouselDef="let item; let i = index; let ani = animate" [@slider]="ani">-->
+    <!--<div class="tile" [style.background]="'url('+item+')'">-->
+      <!--<h1>{{i + 1}}</h1>-->
+    <!--</div>-->
+  <!--</ngu-tile>-->
+
+  <!--<button NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0.5:1">&lt;</button>-->
+  <!--<button NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0.5:1">&gt;</button>-->
+
+  <!--<ul class="myPoint" NguCarouselPoint>-->
+    <!--<li *ngFor="let i of myCarousel.pointNumbers; let i = index" [class.active]="i==myCarousel.activePoint" (click)="myCarousel.moveTo(i)"></li>-->
+  <!--</ul>-->
+<!--</ngu-carousel>-->
+<!--&lt;!&ndash; </ng-container> &ndash;&gt;-->
+
+<!--{{ (carouselTileItems$ | async)?.length }}-->
+
+
+<div class="annotations">
+  <ngu-carousel [inputs]="config" [dataSource]="aboutItem?.annotations">
+    <div class="wrapper" *nguCarouselDef="let annotation; let i = index">
+      <div class="annotation">
+        <div class="annotation-box" [ngStyle]="getTileStyle(annotation.imageUrl)">
+        </div>
+        <div class="annotation-subtitle">
+          <span class="bold">{{ annotation.category }}</span> / {{ annotation.title }}
+        </div>
+      </div>
     </div>
-  </ngu-tile>
-
-  <button NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0.5:1">&lt;</button>
-  <button NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0.5:1">&gt;</button>
-
-  <ul class="myPoint" NguCarouselPoint>
-    <li *ngFor="let i of myCarousel.pointNumbers; let i = index" [class.active]="i==myCarousel.activePoint" (click)="myCarousel.moveTo(i)"></li>
-  </ul>
-</ngu-carousel>
-<!-- </ng-container> -->
-
-{{ (carouselTileItems$ | async)?.length }}
+    <div NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0.5:1"></div>
+    <div NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0.5:1"></div>
+  </ngu-carousel>
+</div>

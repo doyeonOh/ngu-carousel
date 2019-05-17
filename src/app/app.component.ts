@@ -1,13 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  AfterViewInit,
-  ChangeDetectorRef
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NguCarouselConfig } from 'carousel';
-import { Observable, interval, of } from 'rxjs';
-import { startWith, switchMap, take, map } from 'rxjs/operators';
+import { interval, Observable } from 'rxjs';
+import { map, startWith, take } from 'rxjs/operators';
+import { NguCarousel } from './carousel';
 import { slider } from './slide-animation';
 
 @Component({
@@ -18,6 +13,75 @@ import { slider } from './slide-animation';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, AfterViewInit {
+  @ViewChild(NguCarousel) myCarousel: NguCarousel<string>;
+
+  public config = {
+    grid: {
+      xs: 1,
+      sm: 1,
+      md: 2,
+      lg: 2,
+      all: 0
+    },
+    slide: 0.9,
+    speed: 500,
+    // point: {
+    //   visible: true
+    // },
+    load: 2,
+    velocity: 0,
+    touch: true,
+    easing: 'cubic-bezier(0, 0, 0.2, 1)'
+  };
+
+  aboutItem = {
+    title: 'Images & Videos Annotation',
+    annotations: [
+      {
+        category: 'Classification',
+        title: '개와 고양이 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      },
+      {
+        category: 'Polygon',
+        title: '자동차를 폴리곤으로 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      },
+      {
+        category: 'Classification',
+        title: '개와 고양이 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      },
+      {
+        category: 'Polygon',
+        title: '자동차를 폴리곤으로 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      },
+      {
+        category: 'Classification',
+        title: '개와 고양이 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      },
+      {
+        category: 'Polygon',
+        title: '자동차를 폴리곤으로 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      },
+      {
+        category: 'Polygon',
+        title: '자동차를 폴리곤으로 구분하기',
+        imageUrl: 'https://app.zeplin.io/img/icZeplin.svg',
+        videoUrl: ''
+      }
+    ]
+  };
+
   imgags = [
     'assets/bg.jpg',
     'assets/car.png',
@@ -132,5 +196,15 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     return array;
+  }
+
+
+  public getTileStyle(imageUrl: string) {
+    return {
+      backgroundImage: `url(${imageUrl})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'contain',
+      minHeight: 200
+    }
   }
 }
